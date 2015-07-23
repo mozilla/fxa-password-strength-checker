@@ -4,9 +4,10 @@
 
 // A ux utility to suggest password strength
 
-define(['jquery'
+define(['jquery',
+  'bloomfilter'
 ],
-function ($) {
+function ($, bloomfilter) {
   'use strict';
 
   var NO_OF_HASHING_FUNCTIONS = 8;
@@ -14,7 +15,7 @@ function ($) {
   $.ajax({
     method: 'GET',
     dataType: 'json',
-    url: 'bloomdata_short_pwd.js',
+    url: '../bower_components/fxa-password-strength-checker/src/bloomdata_short_pwd.js',
     error: function (jqxhr, status, err) { console.log(status + ' ERROR ' + err); }
   }).done(function (res){
     bloomfilter = new BloomFilter(res, NO_OF_HASHING_FUNCTIONS); //eslint-disable-line no-undef
@@ -53,7 +54,6 @@ function ($) {
 
     if (bool) {
       // password was found in the bloom filter, or was too weak.
-      console.log('password was weak');
       metrics.logEvent('Password found in bloom filter or was weak');
     }
   };
