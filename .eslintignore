@@ -1,0 +1,4 @@
+bower_components/**
+node_modules/**
+tests/node_modules/**
+src/bloomdata_short_pwd.js

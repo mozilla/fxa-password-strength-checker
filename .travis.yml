@@ -1,0 +1,28 @@
+language: node_js
+
+sudo: false
+
+cache:
+  directories:
+    - node_modules
+    - bower_components
+
+notifications:
+  irc:
+    channels:
+      - 'irc.mozilla.org#fxa-bots'
+    use_notice: false
+    skip_join: false
+
+before_install:
+  # Update npm to 2.4
+  - npm install -g npm@2
+
+install:
+  - travis_retry npm install --silent
+  - travis_retry bower install --silent
+
+# now run the tests!
+script:
+  - npm test
+  - npm run lint

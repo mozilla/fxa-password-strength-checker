@@ -1,0 +1,32 @@
+{
+  "name": "fxa-password-strength-checker",
+  "version": "0.0.2",
+  "private": true,
+  "description": "Password strength checker for Firefox Accounts",
+  "main": "src/passwordcheck.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mozilla/fxa-password-strength-checker"
+  },
+  "keywords": [
+    "bloomfilter",
+    "password"
+  ],
+  "author": "Sai Pc",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/mozilla/fxa-password-strength-checker/issues"
+  },
+  "homepage": "https://github.com/mozilla/fxa-password-strength-checker",
+  "devDependencies": {
+    "eslint": "0.24.1",
+    "eslint-config-fxa": "1.8.1"
+  }
+}

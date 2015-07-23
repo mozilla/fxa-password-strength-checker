@@ -1,0 +1,30 @@
+{
+  "name": "fxa-password-strength-checker",
+  "main": "src/passwordcheck.js",
+  "version": "0.0.2",
+  "homepage": "https://github.com/mozilla/fxa-password-strength-checker",
+  "authors": [
+    "Sai Pc"
+  ],
+  "description": "Password strength checker for Firefox Accounts",
+  "keywords": [
+    "BloomFilter",
+    "password"
+  ],
+  "license": "MPL-2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "mocha": "2.2.5",
+    "chai": "3.2.0",
+    "jquery": "~2.1.4"
+  },
+  "moduleType": [
+    "amd"
+  ]
+}
