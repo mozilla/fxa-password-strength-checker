@@ -46,9 +46,11 @@ function ($, bloomfilter) {
       callback('Password with all alphabets/numbers detected');
     }
 
-    if (bool) {
+    if (bool && strong) {
       // password was found in the bloom filter, or was too weak.
-      callback('Password found in bloom filter or was weak');
+      callback('Password found in bloom filter');
+    } else if (!bool && strong) {
+      callback('Password was not found in bloom filter');
     }
   };
 });
