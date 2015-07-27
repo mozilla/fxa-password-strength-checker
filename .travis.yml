@@ -15,7 +15,7 @@ notifications:
     skip_join: false
 
 before_install:
-  # Update npm to 2.4
+  # Update to npm@2
   - npm install -g npm@2
 
 install:
