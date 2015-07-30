@@ -1,6 +1,6 @@
 {
   "name": "fxa-password-strength-checker",
-  "main": "src/passwordcheck.js",
+  "main": "build/fxa-password-strength-checker.js",
   "version": "0.0.2",
   "homepage": "https://github.com/mozilla/fxa-password-strength-checker",
   "authors": [
