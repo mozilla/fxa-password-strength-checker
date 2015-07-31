@@ -7,19 +7,25 @@ module.exports = function (grunt) {
 
   grunt.config('requirejs', {
     options: {
-      baseUrl: '.',
-      name: 'src/passwordcheck',
+      baseUrl: 'src/',
+      name: 'passwordcheck',
       paths: {
-        jquery:'bower_components/jquery/dist/jquery',
-        bloomfilter: 'src/bloomfilter',
-        bloomdata: 'src/bloomdata_short_pwd',
-        passwordcheck: 'src/passwordcheck'
+        jquery:'../bower_components/jquery/dist/jquery',
+        bloomfilter: 'bloomfilter',
+        bloomdata: 'bloomdata_short_pwd'
       },
       waitSeconds: 1
     },
     prod: {
       options: {
-        out: 'build/fxa-password-strength-checker.js'
+        out: 'build/fxa-password-strength-checker.min.js'
+      }
+    },
+    debug: {
+      options: {
+        out: 'build/fxa-password-strength-checker.js',
+        optimize: 'none',
+        preserveLicenseComments: true
       }
     }
   });
