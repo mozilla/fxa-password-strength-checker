@@ -4,11 +4,10 @@
 
 // A utility to check and log password strength
 
-define(['jquery',
-    'bloomfilter',
+define(['bloomfilter',
     'bloomdata'
   ],
-  function ($, bloomfilter, bloomdata) {
+  function (bloomfilter, bloomdata) {
     'use strict';
 
     return function (options) {

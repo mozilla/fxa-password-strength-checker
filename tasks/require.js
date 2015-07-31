@@ -10,7 +10,6 @@ module.exports = function (grunt) {
       baseUrl: 'src/',
       name: 'passwordcheck',
       paths: {
-        jquery:'../bower_components/jquery/dist/jquery',
         bloomfilter: 'bloomfilter',
         bloomdata: 'bloomdata_short_pwd'
       },
