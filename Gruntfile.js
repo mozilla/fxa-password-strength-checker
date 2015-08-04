@@ -15,13 +15,4 @@ module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
   // load local Grunt tasks
   grunt.loadTasks('tasks');
-  // this one is def not ready yet
-  grunt.registerTask('build',
-    'Build client',
-    ['lint', 'requirejs']);
-
-  grunt.registerTask('lint',
-    'Alias for eslint',
-    ['eslint']);
-
 };
