@@ -21,13 +21,13 @@
 
     it('returns ALL_LETTERS_NUMBERS when password is all numbers', function () {
       passwordcheck('12456789', function (res) {
-        assert.equal('ALL_NUMBERS_LETTERS', res);
+        assert.equal('NOT_STRONG_ENOUGH', res);
       });
     });
 
     it('returns ALL_LETTERS_NUMBERS when password is all letters', function () {
       passwordcheck('dragondrag', function (res) {
-        assert.equal('ALL_NUMBERS_LETTERS', res);
+        assert.equal('NOT_STRONG_ENOUGH', res);
       });
     });
   });
