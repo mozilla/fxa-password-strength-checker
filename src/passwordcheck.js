@@ -19,7 +19,7 @@ define(['bloomfilter',
       var bloom = new BloomFilter(BLOOM, NO_OF_HASHING_FUNCTIONS); //eslint-disable-line no-undef
 
       var MESSAGES = {
-        ALL_NUMBERS_LETTERS: 'ALL_NUMBERS_LETTERS',
+        NOT_STRONG_ENOUGH: 'NOT_STRONG_ENOUGH',
         BLOOMFILTER_TRIGGERED: 'BLOOMFILTER_TRIGGERED',
         BLOOMFILTER_HIT: 'BLOOMFILTER_HIT',
         BLOOMFILTER_MISS: 'BLOOMFILTER_MISS',
@@ -28,7 +28,7 @@ define(['bloomfilter',
         PASSWORD_TOO_SHORT: 'PASSWORD_TOO_SHORT'
       };
 
-      function isStrong(password) {
+      function isStrongEnough(password) {
         // Check for passwords that at least contain a number and an alphabet,
         // or if alphabets, then at least (minLength + 4) characters long
         var regexString = '((?=.*[a-zA-Z])(?=.*[0-9])[A-Za-z0-9!@#$%^&*()_+ ]{' + minLength + ',' + (minLength + 4) + '})|([A-Za-z0-9!@#$%^&*()_+ ]{' + (minLength + 4) + ',})';
@@ -46,8 +46,8 @@ define(['bloomfilter',
         // password is non-empty, a string and length greater
         // than minimum length we can start checking
         // for password strength
-        } else if (! isStrong(password)) {
-          callback(MESSAGES.ALL_NUMBERS_LETTERS);
+        } else if (! isStrongEnough(password)) {
+          callback(MESSAGES.NOT_STRONG_ENOUGH);
         // Only if the password has a chance of being
         // strong do we check with the bloom filter
         // else, simply reject the password. This
