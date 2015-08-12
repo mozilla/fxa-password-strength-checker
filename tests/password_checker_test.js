@@ -26,7 +26,7 @@ define(['chai', 'passwordcheck'], function (chai, PasswordCheck) {
     });
 
     it('returns NOT_STRONG_ENOUGH when password is all numbers', function () {
-      passwordcheck('12456789', function (res) {
+      passwordcheck('124567890', function (res) {
         assert.equal('NOT_STRONG_ENOUGH', res);
       });
     });
