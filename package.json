@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/mozilla/fxa-password-strength-checker",
   "devDependencies": {
+    "bloomfilter": "0.0.16",
     "bower": "1.4.1",
     "eslint": "0.24.1",
     "eslint-config-fxa": "1.8.1",
