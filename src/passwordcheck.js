@@ -52,10 +52,13 @@ define([
         // else, simply reject the password. This
         // helps us to not store all-alpha or
         // all-numeric passwords.
-        } else if (bloom.test(password)) {
-          callback(MESSAGES.BLOOMFILTER_HIT);
         } else {
-          callback(MESSAGES.BLOOMFILTER_MISS);
+          var leetPassword = leet.convert(password);
+          if (bloom.test(password) || bloom.test(leetPassword)) {
+            callback(MESSAGES.BLOOMFILTER_HIT);
+          } else {
+            callback(MESSAGES.BLOOMFILTER_MISS);
+          }
         }
       };
     };
