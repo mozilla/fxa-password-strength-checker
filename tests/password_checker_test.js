@@ -41,7 +41,7 @@ define(['chai', 'passwordcheck'], function (chai, PasswordCheck) {
       var badPasswords = ['hooters1', 'charlie2', '!ILO9VEYOU', 'hate_you1990'];
       badPasswords.forEach(function (password) {
         passwordcheck(password, function (res) {
-          assert.equal('BLOOMFILTER_HIT', res);
+          assert.equal('BLOOMFILTER_HIT', res, password);
         });
       });
     });
@@ -50,7 +50,7 @@ define(['chai', 'passwordcheck'], function (chai, PasswordCheck) {
       var goodPasswords = ['notinyourdictionary!', 'imaynotbetheretoo', 'thisisagoodcleanpassword', 'combo1234$#@'];
       goodPasswords.forEach(function (password) {
         passwordcheck(password, function (res) {
-          assert.equal('BLOOMFILTER_MISS', res);
+          assert.equal('BLOOMFILTER_MISS', res, password);
         });
       });
     });

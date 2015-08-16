@@ -27,12 +27,26 @@ define([
       PASSWORD_TOO_SHORT: 'PASSWORD_TOO_SHORT'
     };
 
+    function isAllLetters(password) {
+      return /^[a-zA-Z]+$/.test(password);
+    }
+
+    function isAllNumbers(password) {
+      return /^[0-9]+$/.test(password);
+    }
+
     function isWeakPassword(password) {
       // Check for passwords that consist of only numbers
       // or only alphabets, and are of length less than (minlength + 4)
-      var regexString = '([a-zA-Z]){' + minLength + ',' + (minLength + 4) + '}|([0-9]){' + minLength + ',' + (minLength + 4) + '}';
-      var regex = new RegExp(regexString);
-      return regex.test(password);
+      if (password.length >= (minLength + 4)) {
+        return false;
+      } else if (isAllLetters(password)) {
+        return true;
+      } else if (isAllNumbers(password)) {
+        return true;
+      }
+
+      return false;
     }
 
     return function (password, callback) {
