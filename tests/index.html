@@ -7,38 +7,31 @@
 </head>
 <body>
 <div id="mocha"></div>
-<script src="../bower_components/chai/chai.js"></script>
 <script src="../bower_components/mocha/mocha.js"></script>
-<script src="../src/bloomfilter.js"></script>
-<script src="../src/bloomdata_short_pwd.js"></script>
 <script>mocha.setup('bdd')</script>
+
 <script src="../node_modules/requirejs/require.js"></script>
-<script>
-    require.config({
-        paths: {
-            jquery: '../bower_components/jquery/dist/jquery',
-            bloomfilter: '../src/bloomfilter',
-            bloomdata: '../src/bloomdata_short_pwd',
-            passwordcheck: '../src/passwordcheck'
-        },
-        waitSeconds: 1
-    });
-</script>
 
 <script>
-    require(['passwordcheck'], function (PasswordCheck) {
-        require(['./bloomfilter_test', './password_checker_test'],
-                function (bf_test, pwc_test) {
-                    var NO_OF_HASHING_FUNCTIONS = 8;
-                    bloom = new BloomFilter(BLOOM, NO_OF_HASHING_FUNCTIONS);
-                    passwordcheck = new PasswordCheck();
-                    if (window.mochaPhantomJS) {
-                        mochaPhantomJS.run();
-                    } else {
-                        mocha.run();
-                    }
-                });
-    });
+  require.config({
+    paths: {
+      chai: '../bower_components/chai/chai',
+      jquery: '../bower_components/jquery/dist/jquery',
+      bloomfilter: '../src/bloomfilter',
+      bloomdata: '../src/bloomdata_short_pwd',
+      passwordcheck: '../src/passwordcheck'
+    }
+  });
+
+  require([
+    './password_checker_test'
+  ], function () {
+    if (window.mochaPhantomJS) {
+      mochaPhantomJS.run();
+    } else {
+      mocha.run();
+    }
+  });
 </script>
 </body>
 </html>

@@ -4,29 +4,28 @@
 
 // A utility to check and log password strength
 
-define(['bloomfilter',
-    'bloomdata'
-  ],
-  function (bloomfilter, bloomdata) {
-    'use strict';
+define([
+  'bloomfilter',
+  'bloomdata'
+], function (bloomfilter, bloomdata) {
+  'use strict';
 
-    return function (options) {
-      // do something awesome with the options here, like set up the URL to fetch the data from, or
-      // set the minimum password length.
-      options = options || {};
-      var minLength = options.minLength || 8;
-      var NO_OF_HASHING_FUNCTIONS = options.noOfHashFunctions || 8;
-      var bloom = new BloomFilter(BLOOM, NO_OF_HASHING_FUNCTIONS); //eslint-disable-line no-undef
+  return function (options) {
+    // do something awesome with the options here, like set up the URL to fetch the data from, or
+    // set the minimum password length.
+    options = options || {};
+    var minLength = options.minLength || 8;
+    var NO_OF_HASHING_FUNCTIONS = options.noOfHashFunctions || 8;
+    var bloom = new BloomFilter(BLOOM, NO_OF_HASHING_FUNCTIONS); //eslint-disable-line no-undef
 
-      var MESSAGES = {
-        NOT_STRONG_ENOUGH: 'NOT_STRONG_ENOUGH',
-        BLOOMFILTER_TRIGGERED: 'BLOOMFILTER_TRIGGERED',
-        BLOOMFILTER_HIT: 'BLOOMFILTER_HIT',
-        BLOOMFILTER_MISS: 'BLOOMFILTER_MISS',
-        MISSING_PASSWORD: 'MISSING_PASSWORD',
-        PASSWORD_NOT_A_STRING: 'PASSWORD_NOT_A_STRING',
-        PASSWORD_TOO_SHORT: 'PASSWORD_TOO_SHORT'
-      };
+    var MESSAGES = {
+      BLOOMFILTER_HIT: 'BLOOMFILTER_HIT',
+      BLOOMFILTER_MISS: 'BLOOMFILTER_MISS',
+      MISSING_PASSWORD: 'MISSING_PASSWORD',
+      NOT_STRONG_ENOUGH: 'NOT_STRONG_ENOUGH',
+      PASSWORD_NOT_A_STRING: 'PASSWORD_NOT_A_STRING',
+      PASSWORD_TOO_SHORT: 'PASSWORD_TOO_SHORT'
+    };
 
       function isWeakPassword(password) {
         // Check for passwords that consist of only numbers
@@ -60,4 +59,4 @@ define(['bloomfilter',
         }
       };
     };
-  });
+});
