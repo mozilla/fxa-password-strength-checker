@@ -38,7 +38,7 @@ define(['chai', 'passwordcheck'], function (chai, PasswordCheck) {
     });
 
     it('returns BLOOMFILTER_HIT when password is in bloomfilter', function () {
-      var badPasswords = ['hooters1', 'charlie2', '!ILO9VEYOU', 'hate_you1990'];
+      var badPasswords = ['hooters1', 'charlie2', '1loveyou', 'ihateyou1'];
       badPasswords.forEach(function (password) {
         passwordcheck(password, function (res) {
           assert.equal('BLOOMFILTER_HIT', res, password);
