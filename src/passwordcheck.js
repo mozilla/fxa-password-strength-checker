@@ -15,8 +15,10 @@ define([
     // set the minimum password length.
     options = options || {};
     var minLength = options.minLength || 8;
-    var NO_OF_HASHING_FUNCTIONS = options.noOfHashFunctions || 8;
-    var bloom = new BloomFilter(BLOOM, NO_OF_HASHING_FUNCTIONS); //eslint-disable-line no-undef
+
+    var numberOfHashes = bloomdata.numberOfHashes;
+    var bloomFilterData = bloomdata.bloomFilterData;
+    var bloom = new BloomFilter(bloomFilterData, numberOfHashes); // eslint-disable-line no-undef
 
     var MESSAGES = {
       BLOOMFILTER_HIT: 'BLOOMFILTER_HIT',
