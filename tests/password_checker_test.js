@@ -46,11 +46,18 @@ define(['chai', 'passwordcheck'], function (chai, PasswordCheck) {
       });
     });
 
-    it('returns BLOOMFILTER_MISS when password is not caught by any other tests', function () {
+    it('returns SUCCESS when password >= 12 characters', function () {
+      var longPassword = 'thisis12char';
+      passwordcheck(longPassword, function (res) {
+        assert.equal('SUCCESS', res);
+      });
+    });
+
+    it('returns SUCCESS when password is not caught by any other tests', function () {
       var goodPasswords = ['notinyourdictionary!', 'imaynotbetheretoo', 'thisisagoodcleanpassword', 'combo1234$#@'];
       goodPasswords.forEach(function (password) {
         passwordcheck(password, function (res) {
-          assert.equal('BLOOMFILTER_MISS', res, password);
+          assert.equal('SUCCESS', res, password);
         });
       });
     });
