@@ -20,7 +20,7 @@ define([
 
     var MESSAGES = {
       BLOOMFILTER_HIT: 'BLOOMFILTER_HIT',
-      BLOOMFILTER_MISS: 'BLOOMFILTER_MISS',
+      SUCCESS: 'SUCCESS',
       MISSING_PASSWORD: 'MISSING_PASSWORD',
       NOT_STRONG_ENOUGH: 'NOT_STRONG_ENOUGH',
       PASSWORD_NOT_A_STRING: 'PASSWORD_NOT_A_STRING',
@@ -35,18 +35,12 @@ define([
       return /^[0-9]+$/.test(password);
     }
 
-    function isWeakPassword(password) {
-      // Check for passwords that consist of only numbers
-      // or only alphabets, and are of length less than (minlength + 4)
-      if (password.length >= (minLength + 4)) {
-        return false;
-      } else if (isAllLetters(password)) {
-        return true;
-      } else if (isAllNumbers(password)) {
-        return true;
-      }
+    function isTooShort(password) {
+      return password.length < minLength;
+    }
 
-      return false;
+    function isLongEnough(password) {
+      return password.length >= (minLength + 4);
     }
 
     return function (password, callback) {
@@ -54,22 +48,25 @@ define([
         callback(MESSAGES.MISSING_PASSWORD);
       } else if (typeof password !== 'string') {
         callback(MESSAGES.PASSWORD_NOT_A_STRING);
-      } else if (password.length < minLength) {
+      } else if (isTooShort(password)) {
         callback(MESSAGES.PASSWORD_TOO_SHORT);
+      } else if (isLongEnough(password)) {
+        // password is long enough, it's automatically good.
+        callback(MESSAGES.SUCCESS);
       // password is non-empty, a string and length greater
-      // than minimum length we can start checking
-      // for password strength
-      } else if (isWeakPassword(password)) {
+      // than minimum length, shorter than the strong length.
+      } else if (isAllLetters(password)) {
+        callback(MESSAGES.NOT_STRONG_ENOUGH);
+      } else if (isAllNumbers(password)) {
         callback(MESSAGES.NOT_STRONG_ENOUGH);
       // Only if the password has a chance of being
-      // strong do we check with the bloom filter
-      // else, simply reject the password. This
-      // helps us to not store all-alpha or
-      // all-numeric passwords.
+      // strong, but not too strong, is the bloom filter
+      // checked. All the above tests mean the bloomfilter
+      // data set can be shrunk significantly.
       } else if (bloom.test(password)) {
         callback(MESSAGES.BLOOMFILTER_HIT);
       } else {
-        callback(MESSAGES.BLOOMFILTER_MISS);
+        callback(MESSAGES.SUCCESS);
       }
     };
   };
