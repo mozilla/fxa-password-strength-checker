@@ -16,7 +16,7 @@ define([
 
     var numberOfHashes = bloomdata.numberOfHashes;
     var bloomFilterData = bloomdata.bloomFilterData;
-    var bloom = new BloomFilter(bloomFilterData, numberOfHashes); // eslint-disable-line no-undef
+    var bloom = new BloomFilter(bloomFilterData, numberOfHashes);
 
     var MESSAGES = {
       BLOOMFILTER_HIT: 'BLOOMFILTER_HIT',
