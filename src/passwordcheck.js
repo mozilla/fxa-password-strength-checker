@@ -6,13 +6,11 @@
 
 define([
   'bloomfilter',
-  'bloomdata'
+  'bloomdata-top100k'
 ], function (BloomFilter, bloomdata) {
   'use strict';
 
   return function (options) {
-    // do something awesome with the options here, like set up the URL to fetch the data from, or
-    // set the minimum password length.
     options = options || {};
     var minLength = options.minLength || 8;
 

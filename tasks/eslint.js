@@ -7,7 +7,7 @@ module.exports = function (grunt) {
   grunt.config('eslint', {
     app: {
       eslintrc: '.eslintrc',
-      src: ['Gruntfile.js', 'tasks/*.js', 'src/*.js', '!src/bloomdata_short_pwd.js']
+      src: ['Gruntfile.js', 'tasks/*.js', 'src/*.js', '!src/bloomdata-*.js']
     },
     test: {
       eslintrc: '.eslintrc',
