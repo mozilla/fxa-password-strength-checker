@@ -30,7 +30,7 @@
  *   https://github.com/jasondavies/bloomfilter.js/
 **/
 
-var BloomFilter = (function() { //eslint-disable-line no-unused-vars
+define([], function () {
   'use strict';
   var typedArrays = typeof ArrayBuffer !== 'undefined';
 
@@ -179,4 +179,4 @@ var BloomFilter = (function() { //eslint-disable-line no-unused-vars
     return a & 0xffffffff;
   }
   return BloomFilter;
-})();
+});

@@ -7,7 +7,7 @@
 define([
   'bloomfilter',
   'bloomdata'
-], function (bloomfilter, bloomdata) {
+], function (BloomFilter, bloomdata) {
   'use strict';
 
   return function (options) {
