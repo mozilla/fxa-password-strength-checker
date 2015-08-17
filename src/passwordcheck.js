@@ -27,12 +27,26 @@ define([
       PASSWORD_TOO_SHORT: 'PASSWORD_TOO_SHORT'
     };
 
-    function isStrongEnough(password) {
-      // Check for passwords that at least contain a number and an alphabet,
-      // or if alphabets, then at least (minLength + 4) characters long
-      var regexString = '((?=.*[a-zA-Z])(?=.*[0-9])[A-Za-z0-9!@#$%^&*()_+ ]{' + minLength + ',' + (minLength + 4) + '})|([A-Za-z0-9!@#$%^&*()_+ ]{' + (minLength + 4) + ',})';
-      var regex = new RegExp(regexString);
-      return regex.test(password);
+    function isAllLetters(password) {
+      return /^[a-zA-Z]+$/.test(password);
+    }
+
+    function isAllNumbers(password) {
+      return /^[0-9]+$/.test(password);
+    }
+
+    function isWeakPassword(password) {
+      // Check for passwords that consist of only numbers
+      // or only alphabets, and are of length less than (minlength + 4)
+      if (password.length >= (minLength + 4)) {
+        return false;
+      } else if (isAllLetters(password)) {
+        return true;
+      } else if (isAllNumbers(password)) {
+        return true;
+      }
+
+      return false;
     }
 
     return function (password, callback) {
@@ -45,7 +59,7 @@ define([
       // password is non-empty, a string and length greater
       // than minimum length we can start checking
       // for password strength
-      } else if (! isStrongEnough(password)) {
+      } else if (isWeakPassword(password)) {
         callback(MESSAGES.NOT_STRONG_ENOUGH);
       // Only if the password has a chance of being
       // strong do we check with the bloom filter
