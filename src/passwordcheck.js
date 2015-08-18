@@ -19,12 +19,13 @@ define([
     var bloom = new BloomFilter(bloomFilterData, numberOfHashes);
 
     var MESSAGES = {
+      ALL_LETTERS_OR_NUMBERS: 'ALL_LETTERS_OR_NUMBERS',
       BLOOMFILTER_HIT: 'BLOOMFILTER_HIT',
+      BLOOMFILTER_MISS: 'BLOOMFILTER_MISS',
+      LONG_ENOUGH: 'LONG_ENOUGH',
       MISSING_PASSWORD: 'MISSING_PASSWORD',
-      NOT_STRONG_ENOUGH: 'NOT_STRONG_ENOUGH',
-      PASSWORD_NOT_A_STRING: 'PASSWORD_NOT_A_STRING',
-      PASSWORD_TOO_SHORT: 'PASSWORD_TOO_SHORT',
-      SUCCESS: 'SUCCESS'
+      NOT_A_STRING: 'NOT_A_STRING',
+      TOO_SHORT: 'TOO_SHORT'
     };
 
     function isAllLetters(password) {
@@ -47,18 +48,18 @@ define([
       if (! password) {
         callback(MESSAGES.MISSING_PASSWORD);
       } else if (typeof password !== 'string') {
-        callback(MESSAGES.PASSWORD_NOT_A_STRING);
+        callback(MESSAGES.NOT_A_STRING);
       } else if (isTooShort(password)) {
-        callback(MESSAGES.PASSWORD_TOO_SHORT);
+        callback(MESSAGES.TOO_SHORT);
       } else if (isLongEnough(password)) {
         // password is long enough, it's automatically good.
-        callback(MESSAGES.SUCCESS);
+        callback(MESSAGES.LONG_ENOUGH);
       // password is non-empty, a string and length greater
       // than minimum length, shorter than the strong length.
       } else if (isAllLetters(password)) {
-        callback(MESSAGES.NOT_STRONG_ENOUGH);
+        callback(MESSAGES.ALL_LETTERS_OR_NUMBERS);
       } else if (isAllNumbers(password)) {
-        callback(MESSAGES.NOT_STRONG_ENOUGH);
+        callback(MESSAGES.ALL_LETTERS_OR_NUMBERS);
       // Only if the password has a chance of being
       // strong, but not too strong, is the bloom filter
       // checked. All the above tests mean the bloomfilter
@@ -66,7 +67,7 @@ define([
       } else if (bloom.test(password)) {
         callback(MESSAGES.BLOOMFILTER_HIT);
       } else {
-        callback(MESSAGES.SUCCESS);
+        callback(MESSAGES.BLOOMFILTER_MISS);
       }
     };
   };

@@ -19,21 +19,21 @@ define(['chai', 'passwordcheck'], function (chai, PasswordCheck) {
       });
     });
 
-    it('returns PASSWORD_TOO_SHORT when password is lower than minLength', function () {
+    it('returns TOO_SHORT when password is lower than minLength', function () {
       passwordcheck('124as', function (res) {
-        assert.equal('PASSWORD_TOO_SHORT', res);
+        assert.equal('TOO_SHORT', res);
       });
     });
 
-    it('returns NOT_STRONG_ENOUGH when password is all numbers', function () {
+    it('returns ALL_LETTERS_OR_NUMBERS when password is all numbers', function () {
       passwordcheck('124567890', function (res) {
-        assert.equal('NOT_STRONG_ENOUGH', res);
+        assert.equal('ALL_LETTERS_OR_NUMBERS', res);
       });
     });
 
-    it('returns NOT_STRONG_ENOUGH when password is all letters', function () {
+    it('returns ALL_LETTERS_OR_NUMBERS when password is all letters', function () {
       passwordcheck('dragondrag', function (res) {
-        assert.equal('NOT_STRONG_ENOUGH', res);
+        assert.equal('ALL_LETTERS_OR_NUMBERS', res);
       });
     });
 
@@ -46,18 +46,18 @@ define(['chai', 'passwordcheck'], function (chai, PasswordCheck) {
       });
     });
 
-    it('returns SUCCESS when password >= 12 characters', function () {
+    it('returns LONG_ENOUGH when password >= 12 characters', function () {
       var longPassword = 'thisis12char';
       passwordcheck(longPassword, function (res) {
-        assert.equal('SUCCESS', res);
+        assert.equal('LONG_ENOUGH', res);
       });
     });
 
-    it('returns SUCCESS when password is not caught by any other tests', function () {
-      var goodPasswords = ['notinyourdictionary!', 'imaynotbetheretoo', 'thisisagoodcleanpassword', 'combo1234$#@'];
+    it('returns BLOOMFILTER_MISS when password is not caught by any other tests', function () {
+      var goodPasswords = ['notinyour!', 'combo1234$#'];
       goodPasswords.forEach(function (password) {
         passwordcheck(password, function (res) {
-          assert.equal('SUCCESS', res, password);
+          assert.equal('BLOOMFILTER_MISS', res, password);
         });
       });
     });
