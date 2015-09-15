@@ -1,5 +1,4 @@
 
-var path = require('path');
 var fs = require('fs');
 // do an npm i bloomfilter first
 var bf = require('bloomfilter');
