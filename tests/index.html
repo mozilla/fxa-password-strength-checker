@@ -28,11 +28,7 @@
   require([
     './password_checker_test'
   ], function () {
-    if (window.mochaPhantomJS) {
-      mochaPhantomJS.run();
-    } else {
-      mocha.run();
-    }
+    mocha.run();
   });
 </script>
 </body>
