@@ -53,6 +53,19 @@ define(['chai', 'passwordcheck'], function (chai, PasswordCheck) {
       });
     });
 
+    it('returns NOT_A_STRING when password is not of type string', function () {
+      var notStrings = [123, {}, true];
+      // If this execution environment supports symbols, check those as well
+      if (typeof Symbol !== 'undefined') {
+        notStrings.push(Symbol('imasymbol'));
+      }
+      notStrings.forEach(function (badPassword) {
+        passwordcheck(badPassword, function (res) {
+          assert.equal('NOT_A_STRING', res, badPassword);
+        });
+      });
+    });
+
     it('returns BLOOMFILTER_MISS when password is not caught by any other tests', function () {
       var goodPasswords = ['notinyour!', 'combo1234$#'];
       goodPasswords.forEach(function (password) {
